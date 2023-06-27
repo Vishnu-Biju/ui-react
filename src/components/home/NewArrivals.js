@@ -144,8 +144,9 @@ import React, { useEffect, useState } from "react";
 import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import LoadingCart from "../cards/LoadingCard";
-import { Link } from "react-router-dom";
 import { Pagination } from "antd";
+import { Link } from "react-router-dom";
+
 
 const NewArrivals = () => {
   const [products, setProducts] = useState([]);
@@ -153,25 +154,25 @@ const NewArrivals = () => {
   const [productsCount, setProductsCount] = useState(0);
   const [page, setPage] = useState(1);
 
+
   useEffect(() => {
     loadAllProducts();
-  }, [page, productsCount]); // Update dependency array
+  }, [page]);
+
+
+  
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
 
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
-    getProducts("createdAt", "desc", page)
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    getProducts("createdAt", "desc", page).then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+    });
   };
-
-  useEffect(() => {
-    getProductsCount().then((res) => setProductsCount(res.data));
-  }, []);
 
   return (
     <div className="home-1">
@@ -187,7 +188,7 @@ const NewArrivals = () => {
       <h4 className="jumbow">New Arrivals</h4>
       <h6 className="jumbows">Try it out Now</h6>
 
-      <div className="products">
+      /*<div className="products">
         {loading ? (
           <LoadingCart count={4} />
         ) : (
@@ -198,6 +199,20 @@ const NewArrivals = () => {
                 id="cardmain"
                 className="col-lg-3 col-md-5 p-2"
               >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div> */
+          
+      <div className="products">
+      {loading ? (
+          <LoadingCart count={4} />
+        ) : (
+          <div className="Row">
+            {products.map((product) => (
+              <div key={product._id} id="cardmain" className=" col-lg-3 col-md-5 p-2">
                 <ProductCard product={product} />
               </div>
             ))}

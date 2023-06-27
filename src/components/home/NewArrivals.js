@@ -165,7 +165,7 @@ const NewArrivals = () => {
     setLoading(true);
     // sort, order, limit
     getProducts("createdAt", "desc", page).then((res) => {
-      setProducts(res.data);
+      setProducts(res.data.products); // Update this line
       setLoading(false);
     });
   };

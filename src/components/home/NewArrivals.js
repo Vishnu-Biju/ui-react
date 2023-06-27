@@ -155,20 +155,23 @@ const NewArrivals = () => {
 
   useEffect(() => {
     loadAllProducts();
-  }, [page]);
-
-  useEffect(() => {
-    getProductsCount().then((res) => setProductsCount(res.data));
-  }, []);
+  }, [page, productsCount]); // Update dependency array
 
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
-    getProducts("createdAt", "desc", page).then((res) => {
-      setProducts(res.data.products); // Update this line
-      setLoading(false);
-    });
+    getProducts("createdAt", "desc", page)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
 
   return (
     <div className="home-1">
@@ -189,7 +192,7 @@ const NewArrivals = () => {
           <LoadingCart count={4} />
         ) : (
           <div className="Row">
-            {products.map((product) => (
+            {products && products.map((product) => ( // Add null check
               <div
                 key={product._id}
                 id="cardmain"

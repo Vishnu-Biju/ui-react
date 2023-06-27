@@ -112,17 +112,14 @@ const BestSellers = () => {
         )}
       </div>
       <div className="pagination-container">
-    
-          <Pagination
-            current={page}
-            total={((productsCount / 10) * 10) + 1}
-            onChange={(value) => setPage(value)}
-          />
-        
+        <Pagination
+          current={page}
+          total={Math.ceil(productsCount / 10) * 10 + 1}
+          onChange={(value) => setPage(value)}
+        />
       </div>
     </div>
   );
 };
 
 export default BestSellers;
-

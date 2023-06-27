@@ -77,20 +77,23 @@ const BestSellers = () => {
 
   useEffect(() => {
     loadAllProducts();
-  }, [page]);
-
-  useEffect(() => {
-    getProductsCount().then((res) => setProductsCount(res.data));
-  }, []);
+  }, [page, productsCount]); // Update dependency array
 
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
-    getProducts("sold", "desc", page).then((res) => {
-      setProducts(res.data.products); // Update this line
-      setLoading(false);
-    });
+    getProducts("sold", "desc", page)
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
+
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
 
   return (
     <div className="home-content">
@@ -99,7 +102,7 @@ const BestSellers = () => {
           <LoadingCart count={4} />
         ) : (
           <div className="Row">
-            {products.map((product) => (
+            {products && products.map((product) => ( // Add null check
               <div
                 key={product._id}
                 id="home"
@@ -114,7 +117,7 @@ const BestSellers = () => {
       <div className="pagination-container">
         <Pagination
           current={page}
-          total={Math.ceil(productsCount / 10) * 10}
+          total={Math.ceil(productsCount / 10) * 10 + 1}
           onChange={(value) => setPage(value)}
         />
       </div>

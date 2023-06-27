@@ -87,7 +87,7 @@ const BestSellers = () => {
     setLoading(true);
     // sort, order, limit
     getProducts("sold", "desc", page).then((res) => {
-      setProducts(res.data);
+      setProducts(res.data.products); // Update this line
       setLoading(false);
     });
   };
@@ -114,7 +114,7 @@ const BestSellers = () => {
       <div className="pagination-container">
         <Pagination
           current={page}
-          total={Math.ceil(productsCount / 10) * 10 + 1}
+          total={Math.ceil(productsCount / 10) * 10}
           onChange={(value) => setPage(value)}
         />
       </div>

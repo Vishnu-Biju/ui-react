@@ -1,0 +1,204 @@
+/*  :root {
+  --navBg: #060b26;
+}
+
+.naVbar {
+  position:fixed ;
+  justify-content: center;
+  width: 10%;
+  background-color: var(--navBg) ;
+  top: 0;
+  margin-top: 50px;
+  padding: 30px 20px;
+ 
+  margin-left: 0px;
+  justify-content: start;
+  height: 100%;
+ 
+}
+
+.menu-bars {
+  background: none;
+ 
+}
+
+.nav-menu {
+  
+  background-color: var(--navBg);
+ 
+  height: 100%;
+  justify-content: center;
+  position:fixed ;
+  margin-top: 47px;
+  padding-top: 10px;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  z-index: 666;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #1a83ff;
+}
+
+.nav-menu-items {
+  width: 317.156px;
+  padding: 0;
+}
+
+
+span {
+  margin-left: 16px;
+} 
+
+ */
+
+ :root {
+  --navBg: #ffffff;
+  --navText: #000000;
+  --iconFill: #000000;
+}
+
+.navbar {
+  position: fixed;
+  width: 16%;
+  background-color: var(--navBg);
+  top: 0;
+  margin-top: 60px;
+  padding: 30px 20px;
+  margin-left: 0px;
+  z-index: 999;
+  height: 100%;
+}
+
+.menu-bars {
+  background: none;
+  padding: 0;
+}
+
+.menu-bars svg {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu {
+  background-color: var(--navBg);
+  height: 70vh;
+  position: fixed;
+  margin-top: 47px;
+  padding-bottom: 10px;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  z-index: 666;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+  height: 70vh;
+  
+}
+.nav-menu.active .nav-menu-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 70vh;
+}
+
+
+.nav-menu-items {
+  
+  width: 240px;
+  padding: 20px 20px;
+  margin-top: 30px;
+  padding-left: 16%;
+  list-style: none; /* Remove list bullet */
+  display: flex;
+  flex-direction: column;
+ 
+  gap: 10px;
+}
+
+.nav-content {
+  width: 100%;
+  text-decoration: none;
+  color: var(--navText);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-content:hover {
+  background-color: #f5f5f5;
+}
+
+
+
+.nav-content span {
+  margin-left: 16px;
+}
+
+.menu-bars svg {
+  fill: var(--iconFill);
+}
+
+/* Updated CSS for Breadcrumb Menu on Small Devices */
+
+@media (max-width: 767px) {
+  .navbar {
+    height: auto;
+    margin-top: 50px;
+  }
+
+  .menu-bars {
+    margin-right: 10px;
+  }
+
+  .nav-menu {
+    margin-top: 50px;
+    padding-bottom: 0;
+    height: auto;
+  }
+
+  .nav-menu-items {
+    padding: 20px;
+  }
+
+  .breadcrumb-item:last-child {
+    color: var(--navText);
+    font-weight: bold;
+  }
+}
+

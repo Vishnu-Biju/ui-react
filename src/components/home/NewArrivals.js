@@ -180,7 +180,7 @@ const NewArrivals = () => {
       <h4 className="jumbow">New Arrivals</h4>
       <h6 className="jumbows">Try it out Now</h6>
 
-      <div className="products">
+      /*<div className="products">
         {loading ? (
           <LoadingCart count={4} />
         ) : (
@@ -194,9 +194,9 @@ const NewArrivals = () => {
                 <ProductCard product={product} />
               </div>
             ))}
-          </div>
+          </div>  
         )}
-      </div>
+      </div> */
 
       <div className="pagination-container">
         <Pagination

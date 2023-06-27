@@ -154,17 +154,21 @@ const NewArrivals = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
+    loadAllProducts();
+  }, [page]);
+
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
+  }, []);
+
+  const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
     getProducts("createdAt", "desc", page).then((res) => {
       setProducts(res.data);
       setLoading(false);
     });
-  }, [page]);
-
-  useEffect(() => {
-    getProductsCount().then((res) => setProductsCount(res.data));
-  }, []);
+  };
 
   return (
     <div className="home-1">
@@ -180,7 +184,7 @@ const NewArrivals = () => {
       <h4 className="jumbow">New Arrivals</h4>
       <h6 className="jumbows">Try it out Now</h6>
 
-      /*<div className="products">
+      <div className="products">
         {loading ? (
           <LoadingCart count={4} />
         ) : (
@@ -189,14 +193,14 @@ const NewArrivals = () => {
               <div
                 key={product._id}
                 id="cardmain"
-                className=" col-lg-3 col-md-5 p-2"
+                className="col-lg-3 col-md-5 p-2"
               >
                 <ProductCard product={product} />
               </div>
             ))}
-          </div>  
+          </div>
         )}
-      </div> */
+      </div>
 
       <div className="pagination-container">
         <Pagination

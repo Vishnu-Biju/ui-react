@@ -77,32 +77,29 @@ const BestSellers = () => {
 
   useEffect(() => {
     loadAllProducts();
-  }, [page, productsCount]); // Update dependency array
-
-  const loadAllProducts = () => {
-    setLoading(true);
-    // sort, order, limit
-    getProducts("sold", "desc", page)
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  }, [page]);
 
   useEffect(() => {
     getProductsCount().then((res) => setProductsCount(res.data));
   }, []);
 
+  const loadAllProducts = () => {
+    setLoading(true);
+    // sort, order, limit
+    getProducts("sold", "desc", page).then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+    });
+  };
+
   return (
     <div className="home-content">
       <div className="products">
-        {loading ? (
+       {loading ? (
           <LoadingCart count={4} />
         ) : (
           <div className="Row">
-            {products && products.map((product) => ( // Add null check
+            {products.map((product) => (
               <div
                 key={product._id}
                 id="home"
